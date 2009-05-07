@@ -1,7 +1,7 @@
 @spec = Gem::Specification.new do |s|
-	s.name = "SysInfo"
+	s.name = "sysinfo"
   s.rubyforge_project = "sysinfo"
-	s.version = "0.5"
+	s.version = "0.5.0"
 	s.summary = "SysInfo: All your system-independent infoz in one handy class. "
 	s.description = s.summary
   s.author = "Delano Mandelbaum"
