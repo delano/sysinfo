@@ -1,0 +1,23 @@
+= Sysinfo - v0.5
+
+All your system-independent infoz in one handy class. 
+
+== Installation
+
+Via Rubygems, one of:
+
+    $ sudo gem install sysinfo
+    $ sudo gem install delano-sysinfo --source http://gems.github.com/
+
+or via download:
+* sysinfo-latest.tar.gz[http://github.com/delano/sysinfo/tarball/latest]
+* sysinfo-latest.zip[http://github.com/delano/sysinfo/zipball/latest]
+ 
+
+== Credits
+
+* Delano Mandelbaum (delano@solutious.com)
+
+== License
+
+See: LICENSE.txt
