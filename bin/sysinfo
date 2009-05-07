@@ -14,7 +14,7 @@ require 'rubygems'
 require 'drydock'
 require 'sysinfo'
 
-module SysInfoCLI
+module SysInfoCLI #:nodoc:
   extend Drydock
   
   debug :off
@@ -50,14 +50,27 @@ module SysInfoCLI
     reorg = {}
     SysInfo::IMPLEMENTATIONS.each do |arch| 
       next if arch[0].nil?
-      reorg.store(arch[1,2].join('_'), arch[0])
+      reorg.store(arch[2].to_s, arch[0])
     end
     impl = reorg.keys.sort.collect do |key|
       obj.global.verbose == true ? "%-15s -> %s" % [key, reorg[key].source] : key
     end
-    puts impl
+    puts impl.compact.uniq
   end
   command_alias :impl, :implementations
+  
+  about "Display list of known operating systems (OS)"
+  command :os do |obj|
+    reorg = {}
+    SysInfo::IMPLEMENTATIONS.each do |arch| 
+      next if arch[0].nil?
+      reorg.store(arch[1].to_s, arch[0])
+    end
+    impl = reorg.keys.sort.collect do |key|
+      obj.global.verbose == true ? "%-15s -> %s" % [key, reorg[key].source] : key
+    end
+    puts impl.compact.uniq
+  end
   
 end
 
