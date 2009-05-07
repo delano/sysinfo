@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Thu May 07 08:00:39 -0400 2009</span>
+          <span class='datetime'>Thu May 07 16:00:54 -0400 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -41,6 +41,34 @@
             <p>
             All your system-independent infoz in one handy class.
             </p>
+            <p>
+            <a href="../classes/SysInfo.html">SysInfo</a> does a takes a very quick
+            glance at the system it&#8217;s running on and exposes the results as YAML,
+            JSON, CSV, or TSV. It also determines a platform identifier for the system
+            that takes the form: VM-OS-IMPLEMENTATION-ARCHITECTURE.
+            </p>
+            <h3>Platform Identifier Examples</h3>
+            <pre>ruby-unix-osx-i386&#x000A;ruby-unix-osx-powerpc&#x000A;ruby-unix-linux-x86_64&#x000A;java-win32-windows-i386&#x000A;java-win32-mingw-i386</pre>
+            <p>
+            For the complete list of operating systems, implementations and
+            architectures that <a href="../classes/SysInfo.html">SysInfo</a> is aware
+            of, see:
+            </p>
+            <ul>
+            <li><tt>$ sysinfo os</tt>
+            
+            </li>
+            <li><tt>$ sysinfo impl</tt>
+            
+            </li>
+            <li><tt>$ sysinfo arch</tt>
+            
+            </li>
+            </ul>
+            <h2>Usage &#8212; Library</h2>
+            <pre>sysinfo = SysInfo.new&#x000A;p sysinfo.vm                    # =&gt; ruby&#x000A;p sysinfo.os                    # =&gt; unix&#x000A;p sysinfo.impl                  # =&gt; osx&#x000A;p sysinfo.arch                  # =&gt; i386&#x000A;p sysinfo.platform              # =&gt; ruby-unix&#x000A;p sysinfo.to_s                  # =&gt; ruby-unix-osx-i386&#x000A;&#x000A;p sysinfo.user                  # =&gt; delano&#x000A;p sysinfo.home                  # =&gt; /Users/delano&#x000A;p sysinfo.uptime                # =&gt; 290.429              (hours)&#x000A;p sysinfo.shell                 # =&gt; /bin/bash&#x000A;p sysinfo.paths                 # =&gt; [/sbin, /bin, /usr/bin, ...]&#x000A;&#x000A;p sysinfo.hostname              # =&gt; walter&#x000A;p sysinfo.ipaddress_internal    # =&gt; 10.0.1.2&#x000A;p sysinfo.uptime                # =&gt; 290.573655656974&#x000A;p sysinfo.ruby                  # =&gt; [1,9,1]</pre>
+            <h2>Usage &#8212; Executable</h2>
+            <pre>$ sysinfo&#x000A;ruby-unix-osx-i386&#x000A;&#x000A;$ /usr/jruby/bin/sysinfo&#x000A;java-unix-osx-x86_64&#x000A;&#x000A;$ sysinfo -f yaml&#x000A;:vm: :ruby&#x000A;:os: :unix&#x000A;:impl: :osx&#x000A;...&#x000A;:shell: :&quot;/bin/bash&quot;&#x000A;:user: delano&#x000A;&#x000A;$ sysinfo -f json&#x000A;{&quot;vm&quot;:&quot;ruby&quot;,&quot;os&quot;:&quot;unix&quot;,&quot;impl&quot;:&quot;osx&quot;, ..., &quot;shell&quot;:&quot;\/bin\/bash&quot;,&quot;user&quot;:&quot;delano&quot;}&#x000A;&#x000A;$ sysinfo -f csv&#x000A;ruby,unix,osx, ... /bin/bash,delano</pre>
             <h2>Installation</h2>
             <p>
             Via Rubygems, one of:
@@ -59,9 +87,22 @@
             
             </li>
             </ul>
+            <h2>Prerequisites</h2>
+            <ul>
+            <li>Ruby 1.8, Ruby 1.9, or JRuby 1.2
+            
+            </li>
+            <li><a href="http://github.com/delano/storable">Storable</a>
+            
+            </li>
+            </ul>
             <h2>Credits</h2>
             <ul>
             <li>Delano Mandelbaum (delano@solutious.com)
+            
+            </li>
+            <li>Portions of this code were originally from Amazon&#8217;s EC2 AMI tools,
+            specifically lib/platform.rb.
             
             </li>
             </ul>

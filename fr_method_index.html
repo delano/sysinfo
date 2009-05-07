@@ -4331,20 +4331,20 @@
         
         Element.addMethods();
         var search_index = [
-          { method: 'get_info', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000003"><span class="method_name">get_info</span> <span class="module_name">(SysInfo)</span></a>' },
-          { method: 'guess', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000002"><span class="method_name">guess</span> <span class="module_name">(SysInfo)</span></a>' },
+          { method: 'find_hostname', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000004"><span class="method_name">find_hostname</span> <span class="module_name">(SysInfo)</span></a>' },
+          { method: 'find_ipaddress_internal', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000006"><span class="method_name">find_ipaddress_internal</span> <span class="module_name">(SysInfo)</span></a>' },
+          { method: 'find_network_info', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000003"><span class="method_name">find_network_info</span> <span class="module_name">(SysInfo)</span></a>' },
+          { method: 'find_platform_info', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000002"><span class="method_name">find_platform_info</span> <span class="module_name">(SysInfo)</span></a>' },
+          { method: 'find_uptime', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000005"><span class="method_name">find_uptime</span> <span class="module_name">(SysInfo)</span></a>' },
           { method: 'home', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000012"><span class="method_name">home</span> <span class="module_name">(SysInfo)</span></a>' },
-          { method: 'local_hostname', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000004"><span class="method_name">local_hostname</span> <span class="module_name">(SysInfo)</span></a>' },
-          { method: 'local_ip_address', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000006"><span class="method_name">local_ip_address</span> <span class="module_name">(SysInfo)</span></a>' },
-          { method: 'local_ip_address_alt', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000007"><span class="method_name">local_ip_address_alt</span> <span class="module_name">(SysInfo)</span></a>' },
-          { method: 'local_uptime', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000005"><span class="method_name">local_uptime</span> <span class="module_name">(SysInfo)</span></a>' },
           { method: 'new', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000001"><span class="method_name">new</span> <span class="module_name">(SysInfo)</span></a>' },
-          { method: 'paths', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000010"><span class="method_name">paths</span> <span class="module_name">(SysInfo)</span></a>' },
-          { method: 'platform', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000008"><span class="method_name">platform</span> <span class="module_name">(SysInfo)</span></a>' },
+          { method: 'paths', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000011"><span class="method_name">paths</span> <span class="module_name">(SysInfo)</span></a>' },
+          { method: 'platform', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000007"><span class="method_name">platform</span> <span class="module_name">(SysInfo)</span></a>' },
           { method: 'ruby', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000009"><span class="method_name">ruby</span> <span class="module_name">(SysInfo)</span></a>' },
           { method: 'shell', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000013"><span class="method_name">shell</span> <span class="module_name">(SysInfo)</span></a>' },
           { method: 'tmpdir', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000014"><span class="method_name">tmpdir</span> <span class="module_name">(SysInfo)</span></a>' },
-          { method: 'user', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000011"><span class="method_name">user</span> <span class="module_name">(SysInfo)</span></a>' },
+          { method: 'to_s', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000008"><span class="method_name">to_s</span> <span class="module_name">(SysInfo)</span></a>' },
+          { method: 'user', module: 'sysinfo', html: '<a href="classes/SysInfo.html#M000010"><span class="method_name">user</span> <span class="module_name">(SysInfo)</span></a>' },
         ]
         $(document).observe('dom:loaded', function() {
         	// Setup search-during-typing.
@@ -4407,20 +4407,20 @@
       </form>
       <ol class='methods' id='search-results' style='display: none'></ol>
       <ol class='methods' id='index-entries'>
-        <li><a href="classes/SysInfo.html#M000003"><span class="method_name">get_info</span> <span class="module_name">(SysInfo)</span></a></li>
-        <li><a href="classes/SysInfo.html#M000002"><span class="method_name">guess</span> <span class="module_name">(SysInfo)</span></a></li>
+        <li><a href="classes/SysInfo.html#M000004"><span class="method_name">find_hostname</span> <span class="module_name">(SysInfo)</span></a></li>
+        <li><a href="classes/SysInfo.html#M000006"><span class="method_name">find_ipaddress_internal</span> <span class="module_name">(SysInfo)</span></a></li>
+        <li><a href="classes/SysInfo.html#M000003"><span class="method_name">find_network_info</span> <span class="module_name">(SysInfo)</span></a></li>
+        <li><a href="classes/SysInfo.html#M000002"><span class="method_name">find_platform_info</span> <span class="module_name">(SysInfo)</span></a></li>
+        <li><a href="classes/SysInfo.html#M000005"><span class="method_name">find_uptime</span> <span class="module_name">(SysInfo)</span></a></li>
         <li><a href="classes/SysInfo.html#M000012"><span class="method_name">home</span> <span class="module_name">(SysInfo)</span></a></li>
-        <li><a href="classes/SysInfo.html#M000004"><span class="method_name">local_hostname</span> <span class="module_name">(SysInfo)</span></a></li>
-        <li><a href="classes/SysInfo.html#M000006"><span class="method_name">local_ip_address</span> <span class="module_name">(SysInfo)</span></a></li>
-        <li><a href="classes/SysInfo.html#M000007"><span class="method_name">local_ip_address_alt</span> <span class="module_name">(SysInfo)</span></a></li>
-        <li><a href="classes/SysInfo.html#M000005"><span class="method_name">local_uptime</span> <span class="module_name">(SysInfo)</span></a></li>
         <li><a href="classes/SysInfo.html#M000001"><span class="method_name">new</span> <span class="module_name">(SysInfo)</span></a></li>
-        <li><a href="classes/SysInfo.html#M000010"><span class="method_name">paths</span> <span class="module_name">(SysInfo)</span></a></li>
-        <li><a href="classes/SysInfo.html#M000008"><span class="method_name">platform</span> <span class="module_name">(SysInfo)</span></a></li>
+        <li><a href="classes/SysInfo.html#M000011"><span class="method_name">paths</span> <span class="module_name">(SysInfo)</span></a></li>
+        <li><a href="classes/SysInfo.html#M000007"><span class="method_name">platform</span> <span class="module_name">(SysInfo)</span></a></li>
         <li><a href="classes/SysInfo.html#M000009"><span class="method_name">ruby</span> <span class="module_name">(SysInfo)</span></a></li>
         <li><a href="classes/SysInfo.html#M000013"><span class="method_name">shell</span> <span class="module_name">(SysInfo)</span></a></li>
         <li><a href="classes/SysInfo.html#M000014"><span class="method_name">tmpdir</span> <span class="module_name">(SysInfo)</span></a></li>
-        <li><a href="classes/SysInfo.html#M000011"><span class="method_name">user</span> <span class="module_name">(SysInfo)</span></a></li>
+        <li><a href="classes/SysInfo.html#M000008"><span class="method_name">to_s</span> <span class="module_name">(SysInfo)</span></a></li>
+        <li><a href="classes/SysInfo.html#M000010"><span class="method_name">user</span> <span class="module_name">(SysInfo)</span></a></li>
       </ol>
     </div>
   </body>
