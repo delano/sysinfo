@@ -13,10 +13,15 @@ or via download:
 * sysinfo-latest.tar.gz[http://github.com/delano/sysinfo/tarball/latest]
 * sysinfo-latest.zip[http://github.com/delano/sysinfo/zipball/latest]
  
+== Prerequisites
+
+* Ruby 1.8, Ruby 1.9, or JRuby 1.2
+* Storable[http://github.com/delano/storable]
 
 == Credits
 
 * Delano Mandelbaum (delano@solutious.com)
+* Portions of this code were originally from Amazon's EC2 AMI tools, specifically lib/platform.rb.
 
 == License
 

@@ -1,0 +1,37 @@
+#!/usr/bin/ruby
+
+# SysInfo -- A Command Line Interface
+#
+# If your reading this via the rdocs you won't be able to see the code
+# See: http://github.com/delano/sysinfo/blob/master/bin/sysinfo
+#
+# Usage: bin/sysinfo
+#
+
+$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib')) # Make sure our local lib is first in line
+
+require 'rubygems'
+require 'drydock'
+require 'sysinfo'
+
+module SysInfoCLI
+  extend Drydock
+  
+  debug :off
+  default :info
+  
+  global :f, :format, String, "Output format. One of: yaml, json, csv, tsv, string (default)"
+  global :v, :verbose, "Output everything I know"
+  global :V, :version, "Display version number" do
+    puts "SysInfo version: #{SysInfo::VERSION}"
+    exit 0
+  end
+  
+  command :info do |obj|
+    format = obj.global.format || :string
+    format = :yaml if obj.global.verbose == true
+    si = SysInfo.new
+    puts si.dump(format)
+  end
+  
+end

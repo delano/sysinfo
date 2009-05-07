@@ -1,4 +1,6 @@
 require 'socket'
+require 'storable'
+require 'time'
 
 # = SysInfo
 # 
@@ -7,7 +9,7 @@ require 'socket'
 # specifically lib/platform.rb. 
 class SysInfo < Storable
   unless defined?(IMPLEMENTATIONS)
-    VERSION = 5.freeze
+    VERSION = 0.5.freeze
     IMPLEMENTATIONS = [
     
       # These are for JRuby, System.getproperty('os.name'). 
@@ -48,173 +50,221 @@ class SysInfo < Storable
       [/sparc/i,    :sparc            ],
       [/mips/i,     :mips             ],
       [/powerpc/i,  :powerpc          ],
-      [/universal/i,:universal        ],
+      [/universal/i,:i386             ],
       [nil,         :unknown          ],
     ].freeze
   end
 
-
+  field :vm => String
   field :os => String
-  field :implementation => String
-  field :architecture => String
+  field :impl => String
+  field :arch => String
   field :hostname => String
-  field :ipaddress => String
-  field :ipaddress_external => String
+  field :ipaddress_internal => String
+  #field :ipaddress_external => String
   field :uptime => Float
   
+  field :paths
+  field :tmpdir
+  field :home
+  field :shell
+  field :user
+  field :ruby
   
-  alias :impl :implementation
-  alias :arch :architecture
+  alias :implementation :impl
+  alias :architecture :arch
 
-  
   def initialize
-    @os, @implementation, @architecture = guess
-    @hostname, @ipaddress, @uptime = get_info
+    @vm, @os, @impl, @arch = find_platform_info
+    @hostname, @ipaddress_internal, @uptime = find_network_info
+    require 'Win32API' if @os == :win32
   end
   
-  
-  # This is called at require-time. It guesses the 
-  # current operating system, implementation, architecture. 
-  # Returns [os, impl, arch]
-  def guess
-    os = :unknown
-    impl = :unknown
-    arch = :unknown
+  # Returns [vm, os, impl, arch]
+  def find_platform_info
+    vm, os, impl, arch = :ruby, :unknown, :unknown, :unknow
     IMPLEMENTATIONS.each do |r, o, i|
-      if r and RUBY_PLATFORM =~ r
-        os, impl = [o, i]
-        break
-      end
+      next unless RUBY_PLATFORM =~ r
+      os, impl = [o, i]
+      break
     end
     ARCHITECTURES.each do |r, a|
-      if r and RUBY_PLATFORM =~ r
-        arch = a
-        break
-      end
+      next unless RUBY_PLATFORM =~ r
+      arch = a
+      break
     end
-    
-    #
-    if os == :win32
-      #require 'Win32API'
-      
-    # If we're running in java, we'll need to look elsewhere
-    # for the implementation and architecture. 
-    # We'll replace IMPL and ARCH with what we find. 
-    elsif os == :java
-      require 'java'
-      include_class java.lang.System
-      
-      osname = System.getProperty("os.name")
-      IMPLEMENTATIONS.each do |r, o, i|
-        if r and osname =~ r
-          impl = i
-          break
-        end
-      end
-      
-      osarch = System.getProperty("os.arch")
-      ARCHITECTURES.each do |r, a|
-        if r and osarch =~ r
-          arch = a
-          break
-        end
-      end
-      
-    end
-    
-    [os, impl, arch]
+    os == :java ? guess_java : [vm, os, impl, arch]
   end
   
-  # Returns [hostname, ipaddr, uptime] for the local machine
-  def get_info
-    hostname = :unknown
-    ipaddr = :unknown
-    uptime = :unknown
-
+  # Returns [hostname, ipaddr (internal), uptime]
+  def find_network_info
+    hostname, ipaddr, uptime = :unknown, :unknown, :unknown
     begin
-      hostname = local_hostname
-      ipaddr = local_ip_address
-      uptime = local_uptime       
-    rescue => ex
-      # Be silent!
+      hostname = find_hostname
+      ipaddr = find_ipaddress_internal
+      uptime = find_uptime       
+    rescue => ex # Be silent!
     end
-
     [hostname, ipaddr, uptime]
   end
   
-  # Return the hostname for the local machine
-  def local_hostname
-    Socket.gethostname
-  end
-  
+    # Return the hostname for the local machine
+  def find_hostname; Socket.gethostname; end
   
   # Returns the local uptime in hours. Use Win32API in Windows, 
   # 'sysctl -b kern.boottime' os osx, and 'who -b' on unix.
   # Based on Ruby Quiz solutions by: Matthias Reitinger 
   # On Windows, see also: net statistics server
-  def local_uptime
-
-    # Each method must return uptime in seconds
-    methods = {
-
-      :win32_windows => lambda {
-        # Win32API is required in self.guess
-        getTickCount = Win32API.new("kernel32", "GetTickCount", nil, 'L')
-        ((getTickCount.call()).to_f / 1000).to_f
-      },
-
-      # Ya, this is kinda wack. Ruby -> Java -> Kernel32. See:
-      # http://www.oreillynet.com/ruby/blog/2008/01/jruby_meets_the_windows_api_1.html
-      # http://msdn.microsoft.com/en-us/library/ms724408(VS.85).aspx
-      # Ruby 1.9.1: Win32API is now deprecated in favor of using the DL library.
-      :java_windows => lambda {
-        kernel32 = com.sun.jna.NativeLibrary.getInstance('kernel32')
-        buf = java.nio.ByteBuffer.allocate(256)
-        (kernel32.getFunction('GetTickCount').invokeInt([256, buf].to_java).to_f / 1000).to_f 
-      },
-      
-      :unix_osx => lambda {
-        # This is faster than who and could work on BSD also. 
-        (Time.now.to_f - Time.at(`sysctl -b kern.boottime 2>/dev/null`.unpack('L').first).to_f).to_f
-      },
-      # This should work for most unix flavours. 
-      :unix => lambda {
-        # who is sloooooow. Use File.read('/proc/uptime')
-        (Time.now.to_f - Time.parse(`who -b 2>/dev/null`).to_f)
-      }
-    }
-
+  def find_uptime
     hours = 0
-    
     begin
-      key = platform
-      method = (methods.has_key? key) ? methods[key] : methods[:unix]
-      hours = (method.call) / 3600 # seconds to hours
+      seconds = execute_platform_specific("find_uptime") || 0
+      hours = seconds / 3600 # seconds to hours
     rescue => ex
+      #puts ex.message  # TODO: implement debug?
     end
     hours
   end
 
-
-  #
+  
   # Return the local IP address which receives external traffic
   # from: http://coderrr.wordpress.com/2008/05/28/get-your-local-ip-address/
   # NOTE: This <em>does not</em> open a connection to the IP address. 
-  def local_ip_address
+  def find_ipaddress_internal
     # turn off reverse DNS resolution temporarily 
     orig, Socket.do_not_reverse_lookup = Socket.do_not_reverse_lookup, true   
-    UDPSocket.open {|s| s.connect('75.101.137.7', 1); s.addr.last } # Solutious IP
+    UDPSocket.open {|s| s.connect('65.74.177.129', 1); s.addr.last } # GitHub IP
   ensure  
     Socket.do_not_reverse_lookup = orig
   end
-
+  
+  # Returns a Symbol of the short platform descriptor in the format: VM-OS
+  # e.g. <tt>:java-unix</tt>
+  def platform
+    "#{@vm}-#{@os}".to_sym
+  end
+  
+  # Returns a String of the full platform descriptor in the format: VM-OS-IMPL-ARCH
+  # e.g. <tt>java-unix-osx-x86_64</tt>
+  def to_s(*args)
+    "#{@vm}-#{@os}-#{@impl}-#{@arch}".to_sym
+  end
+  
+    # Returns Ruby version as an Array of Integers. e.g. [1,9,1]
+  def ruby; RUBY_VERSION.split('.').collect { |v| v.to_i }; end
+    # Return the name of the current user
+  def user; ENV['USER']; end
+    # Returns the environment paths as an Array
+  def paths; execute_platform_specific(:paths); end
+    # Returns the path to the current user's home directory
+  def home; execute_platform_specific(:home); end
+    # Returns the name of the current shell
+  def shell; execute_platform_specific(:shell); end
+    # Returns the path to the current temp directory
+  def tmpdir; execute_platform_specific(:tmpdir); end
+  
+ private
+  
+  # Look for and execute a platform specific method. 
+  # The name of the method will be in the format: +dtype-VM-OS-IMPL+.
+  # e.g. find_uptime_ruby_unix_osx
   #
+  def execute_platform_specific(dtype)
+    criteria = [@vm, @os, @impl]
+    while !criteria.empty?
+      meth = [dtype, criteria].join('_').to_sym
+      return self.send(meth) if SysInfo.private_method_defined?(meth)
+      criteria.pop
+    end
+    raise "#{dtype}_#{@vm}_#{@os}_#{@impl} not implemented" 
+  end
+  
+  def paths_ruby_unix; (ENV['PATH'] || '').split(':'); end
+  def paths_ruby_win32; (ENV['PATH'] || '').split(';'); end # Not tested!
+  def paths_java
+    delim = @impl == :windows ? ';' : ':'
+    (ENV['PATH'] || '').split(delim)
+  end
+  
+  def tmpdir_ruby_unix; (ENV['TMPDIR'] || '/tmp'); end
+  def tmpdir_ruby_win32; (ENV['TMPDIR'] || 'C:\\temp'); end
+  def tmpdir_java
+    default = @impl == :windows ? 'C:\\temp' : '/tmp'
+    (ENV['TMPDIR'] || default)
+  end
+  
+  def shell_ruby_unix; (ENV['SHELL'] || 'bash').to_sym; end
+  def shell_ruby_win32; :dos; end
+  alias_method :shell_java_unix, :shell_ruby_unix
+  alias_method :shell_java_win32, :shell_ruby_win32
+  
+  def home_ruby_unix; File.expand_path(ENV['HOME']); end
+  def home_ruby_win32; File.expand_path(ENV['USERPROFILE']); end
+  def home_java
+    if @impl == :windows
+      File.expand_path(ENV['USERPROFILE'])
+    else
+      File.expand_path(ENV['HOME'])
+    end
+  end
+  
+  # Ya, this is kinda wack. Ruby -> Java -> Kernel32. See:
+  # http://www.oreillynet.com/ruby/blog/2008/01/jruby_meets_the_windows_api_1.html
+  # http://msdn.microsoft.com/en-us/library/ms724408(VS.85).aspx
+  # Ruby 1.9.1: Win32API is now deprecated in favor of using the DL library.
+  def find_uptime_java_win32_windows
+    kernel32 = com.sun.jna.NativeLibrary.getInstance('kernel32')
+    buf = java.nio.ByteBuffer.allocate(256)
+    (kernel32.getFunction('GetTickCount').invokeInt([256, buf].to_java).to_f / 1000).to_f
+  end
+  def find_uptime_ruby_win32_windows
+    # Win32API is required in self.guess
+    getTickCount = Win32API.new("kernel32", "GetTickCount", nil, 'L')
+    ((getTickCount.call()).to_f / 1000).to_f
+  end
+  def find_uptime_ruby_unix_osx
+    # This is faster than "who" and could work on BSD also. 
+    (Time.now.to_f - Time.at(`sysctl -b kern.boottime 2>/dev/null`.unpack('L').first).to_f).to_f
+  end
+  
+  # This should work for most unix flavours.
+  def find_uptime_ruby_unix
+    # who is sloooooow. Use File.read('/proc/uptime')
+    (Time.now.to_i - Time.parse(`who -b 2>/dev/null`).to_f)
+  end
+  alias_method :find_uptime_java_unix_osx, :find_uptime_ruby_unix
+  
+  # Determine the values for vm, os, impl, and arch when running on Java. 
+  def guess_java
+    vm, os, impl, arch = :java, :unknown, :unknown, :unknown
+    require 'java'
+    include_class java.lang.System
+    
+    osname = System.getProperty("os.name")
+    IMPLEMENTATIONS.each do |r, o, i|
+      next unless osname =~ r
+      os, impl = [o, i]
+      break
+    end
+    
+    osarch = System.getProperty("os.arch")
+    ARCHITECTURES.each do |r, a|
+      next unless osarch =~ r
+      arch = a
+      break
+    end
+    [vm, os, impl, arch]
+  end
+  
   # Returns the local IP address based on the hostname. 
   # According to coderrr (see comments on blog link above), this implementation
   # doesn't guarantee that it will return the address for the interface external
   # traffic goes through. It's also possible the hostname isn't resolvable to the
   # local IP.  
-  def local_ip_address_alt
+  #
+  # NOTE: This code predates the current ip_address_internal. It was just as well
+  # but the other code is cleaner. I'm keeping this old version here for now.
+  def ip_address_internal_alt
     ipaddr = :unknown
     begin
       saddr = Socket.getaddrinfo(  Socket.gethostname, nil, Socket::AF_UNSPEC, Socket::SOCK_STREAM, nil, Socket::AI_CANONNAME)
@@ -223,82 +273,6 @@ class SysInfo < Storable
     end
     ipaddr
   end
-
-  # returns a symbol in the form: os_implementation. This is used throughout Stella
-  # for platform specific support. 
-  def platform
-    "#{@os}_#{@implementation}".to_sym
-  end
-  
-  # Returns Ruby version as an array
-  def ruby
-    RUBY_VERSION.split('.').map { |v| v.to_i }
-  end
-  
-  # Returns the environment PATH as an Array
-  def paths
-    if @os == :unix
-      (ENV['PATH'] || '').split(':')
-    elsif @os == :win32
-      (ENV['PATH'] || '').split(';') # Not tested!
-    elsif @os == :java
-      delim = @impl == :windows ? ';' : ':'
-      (ENV['PATH'] || '').split(delim)
-    else
-      raise "paths not implemented for: #{@os}"
-    end
-  end
-  
-  def user
-    ENV['USER']
-  end
-  
-  def home
-    if @os == :unix
-      File.expand_path(ENV['HOME'])
-    elsif @os == :win32
-      File.expand_path(ENV['USERPROFILE'])
-    elsif @os == :java
-      if @impl == :windows
-        File.expand_path(ENV['USERPROFILE'])
-      else
-        File.expand_path(ENV['HOME'])
-      end
-    else
-      raise "paths not implemented for: #{@os}"
-    end
-  end
-  
-  def shell
-    if @os == :unix
-      (ENV['SHELL'] || 'bash').to_sym
-    elsif @os == :win32
-      :dos
-    else
-      raise "paths not implemented for: #{@os}"
-    end
-  end
-  
-  def tmpdir
-    if @os == :unix
-      (ENV['TMPDIR'] || '/tmp')
-    elsif @os == :win32
-      (ENV['TMPDIR'] || 'C:\\temp')
-    elsif @os == :java
-      default = @impl == :windows ? 'C:\\temp' : '/tmp'
-      (ENV['TMPDIR'] || default)
-    else
-      raise "paths not implemented for: #{@os}"
-    end
-  end
-  
-  # Print friendly system information. 
-  ##def to_s
-  ##  sprintf("Hostname: %s#{$/}IP Address: %s#{$/}System: %s#{$/}Uptime: %.2f (hours)#{$/}Ruby: #{ruby.join('.')}", 
-  ##    @hostname, @ipaddress, "#{@os}-#{@implementation}-#{@architecture}", @uptime)
-  ##end
-  
-  
 end
 
 

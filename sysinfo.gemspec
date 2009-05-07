@@ -1,7 +1,7 @@
 @spec = Gem::Specification.new do |s|
 	s.name = "sysinfo"
   s.rubyforge_project = "sysinfo"
-	s.version = "0.5.0"
+	s.version = "0.5.1"
 	s.summary = "SysInfo: All your system-independent infoz in one handy class. "
 	s.description = s.summary
   s.author = "Delano Mandelbaum"
@@ -12,12 +12,11 @@
   # = EXECUTABLES =
   # The list of executables in your project (if any). Don't include the path, 
   # just the base filename.
-  s.executables = %w[]
+  s.executables = %w[sysinfo]
   
   # = DEPENDENCIES =
   # Add all gem dependencies
-  #s.add_dependency ''
-  #s.add_dependency '', '>= 0.0'
+  s.add_dependency 'storable', '>= 0.5.1'
     
   # = MANIFEST =
   # The complete list of files to be included in the release. When GitHub packages your gem, 
@@ -30,6 +29,7 @@
   LICENSE.txt
   README.rdoc
   Rakefile
+  bin/sysinfo
   lib/sysinfo.rb
   sysinfo.gemspec
   )
