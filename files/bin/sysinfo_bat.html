@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang='en'>
   <head>
-    <title>File: sysinfo [SysInfo: All your system-independent infoz in one handy class.]</title>
+    <title>File: sysinfo.bat [SysInfo: All your system-independent infoz in one handy class.]</title>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
     <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
     <script type='text/javascript'>
@@ -25,40 +25,37 @@
   <body class='page'>
     <div class='file' id='wrapper'>
       <div class='header'>
-        <h1 class='name'>sysinfo</h1>
+        <h1 class='name'>sysinfo.bat</h1>
         <div class='paths'>
-          bin/sysinfo
+          bin/sysinfo.bat
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Thu May 07 16:03:05 -0400 2009</span>
+          <span class='datetime'>Tue Jun 09 11:32:38 -0400 2009</span>
         </div>
       </div>
       <div id='content'>
         <div id='text'>
           <div id='description'>
             <p>
-            <a href="../../classes/SysInfo.html">SysInfo</a> &#8212; A Command Line
-            Interface
+            @echo off
             </p>
             <p>
-            If your reading this via the rdocs you won&#8217;t be able to see the code
-            See: <a
-            href="http://github.com/delano/sysinfo/blob/master/bin/sysinfo">github.com/delano/sysinfo/blob/master/bin/sysinfo</a>
+            rem Check for funkiness when called from another batch script. rem We want
+            FULL_PATH to contain the full path to the stella bin directory. IF EXIST
+            &#8220;%~dp0sysinfo.bat&#8220; (set FULL_PATH=%~dp0) ELSE (set
+            FULL_PATH=%~dp$PATH:0)
             </p>
             <p>
-            Usage: <a href="sysinfo.html">bin/sysinfo</a>
+            rem Check for JRuby, otherwise use Ruby. rem We want EXECUTABLE to contain
+            either &#8220;jruby&#8221; or &#8220;ruby&#8221; IF EXIST
+            &#8220;%JRUBY_HOME%&#8221; (set EXECUTABLE=jruby) ELSE (set
+            EXECUTABLE=ruby)
             </p>
-          </div>
-          <div id='context'>
-            <div id='requires'>
-              <h2>Required files</h2>
-              <ol>
-                <li>rubygems</li>
-                <li>drydock</li>
-                <li>sysinfo</li>
-              </ol>
-            </div>
+            <p>
+            rem Call the Ruby script, passing it all the arguments. @%EXECUTABLE%
+            %FULL_PATH%sysinfo %*
+            </p>
           </div>
           <div id='section'>
           </div>

@@ -1,0 +1,23 @@
+SYSINFO, CHANGES
+
+
+#### 0.6.0 (2009-06-09) ###############################
+
+* CHANGE: "universal" mapped to "i386". Now: "x86_64"
+* CHANGE: "x86" mapped to "386". Now: "x86"
+* CHANGE: /i\d86/ mapped to "386". Now: "x86"
+
+
+#### 0.5.1 (2009-05-07) ###############################
+
+* CHANGE: Hella cleanup in preparation for future expansion. 
+* CHANGE: Modified platform, now returns VM-OS instead of OS-IMPL
+* ADDED: to_s which returns a full platform string
+* ADDED: sysinfo executable
+
+
+#### 0.5 (2009-05-07) ###############################
+
+* First public release. See commit history for solutious-stella, solutious-rudy, 
+and delano-rye for complete history of SysInfo (was SystemInfo).
+
