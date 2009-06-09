@@ -1,6 +1,13 @@
 SYSINFO, CHANGES
 
 
+#### 0.6.0 (2009-06-09) ###############################
+
+* CHANGE: "universal" mapped to "i386". Now: "x86_64"
+* CHANGE: "x86" mapped to "386". Now: "x86"
+* CHANGE: /i\d86/ mapped to "386". Now: "x86"
+
+
 #### 0.5.1 (2009-05-07) ###############################
 
 * CHANGE: Hella cleanup in preparation for future expansion. 

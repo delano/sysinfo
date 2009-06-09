@@ -1,7 +1,7 @@
 @spec = Gem::Specification.new do |s|
 	s.name = "sysinfo"
   s.rubyforge_project = "sysinfo"
-	s.version = "0.5.1"
+	s.version = "0.6.0"
 	s.summary = "SysInfo: All your system-independent infoz in one handy class. "
 	s.description = s.summary
   s.author = "Delano Mandelbaum"
@@ -17,6 +17,7 @@
   # = DEPENDENCIES =
   # Add all gem dependencies
   s.add_dependency 'storable', '>= 0.5.1'
+  s.add_dependency 'drydock', '>= 0.6.3'
     
   # = MANIFEST =
   # The complete list of files to be included in the release. When GitHub packages your gem, 

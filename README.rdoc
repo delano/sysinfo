@@ -1,4 +1,4 @@
-= SysInfo - v0.5
+= SysInfo - v0.6
 
 All your system-independent infoz in one handy class. 
 
