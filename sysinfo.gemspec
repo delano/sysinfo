@@ -16,8 +16,8 @@
   
   # = DEPENDENCIES =
   # Add all gem dependencies
-  s.add_dependency 'storable', '>= 0.5.1'
-  s.add_dependency 'drydock', '>= 0.6.3'
+  s.add_dependency 'storable'
+  s.add_dependency 'drydock'
     
   # = MANIFEST =
   # The complete list of files to be included in the release. When GitHub packages your gem, 
