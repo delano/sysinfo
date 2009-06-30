@@ -1,5 +1,11 @@
 SYSINFO, CHANGES
 
+#### 0.6.2 (2009-06-30) #############################
+
+* CHANGE: Updated bin/sysinfo for Drydock 0.6.6
+* CHANGE: Removed "require 'rubygems'"
+
+
 #### 0.6.1 (2009-05-25) #############################
 
 * CHANGE: Removed RedCloth dependency from gemspec.

@@ -10,14 +10,13 @@
 
 $:.unshift(File.join(File.dirname(__FILE__), '..', 'lib')) # Make sure our local lib is first in line
 
-require 'rubygems'
 require 'drydock'
 require 'sysinfo'
 
 module SysInfoCLI #:nodoc:
   extend Drydock
   
-  debug :off
+  debug :on
   default :info
   
   global :f, :format, String, "Output format. One of: yaml, json, csv, tsv, string (default)"
@@ -74,4 +73,4 @@ module SysInfoCLI #:nodoc:
   
 end
 
-
+Drydock.run!(ARGV, STDIN) if Drydock.run? && !Drydock.has_run?
