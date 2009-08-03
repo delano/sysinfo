@@ -238,7 +238,7 @@ class SysInfo < Storable
   def guess_java
     vm, os, impl, arch = :java, :unknown, :unknown, :unknown
     require 'java'
-    include_class java.lang.System
+    include_class java.lang.System unless defined?(System)
     
     osname = System.getProperty("os.name")
     IMPLEMENTATIONS.each do |r, o, i|

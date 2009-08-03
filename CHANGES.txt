@@ -1,5 +1,9 @@
 SYSINFO, CHANGES
 
+#### 0.6.3 (2009-08-03) #############################
+
+* FIXED: "warning: already initialized constant System" in JRuby
+
 #### 0.6.2 (2009-06-30) #############################
 
 * CHANGE: Updated bin/sysinfo for Drydock 0.6.6
