@@ -1,5 +1,15 @@
 SYSINFO, CHANGES
 
+
+#### 0.7.0 (2009-08-24) #############################
+
+NOTE: SysInfo strings are not compatible with previous releases. 
+
+* CHANGE: All references to "win32" are now "windows". This resolves
+  the ambiguity between the OS and the Win32 API. 
+* CHANGE: All references to "i386" are now "x86"
+
+
 #### 0.6.3 (2009-08-03) #############################
 
 * FIXED: "warning: already initialized constant System" in JRuby
@@ -8,7 +18,6 @@ SYSINFO, CHANGES
 
 * CHANGE: Updated bin/sysinfo for Drydock 0.6.6
 * CHANGE: Removed "require 'rubygems'"
-
 
 #### 0.6.1 (2009-05-25) #############################
 

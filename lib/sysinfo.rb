@@ -9,20 +9,19 @@ require 'time'
 # specifically lib/platform.rb. 
 class SysInfo < Storable
   unless defined?(IMPLEMENTATIONS)
-    VERSION = "0.6.3".freeze
+    VERSION = "0.7.0".freeze
     IMPLEMENTATIONS = [
     
       # These are for JRuby, System.getproperty('os.name'). 
       # For a list of all values, see: http://lopica.sourceforge.net/os.html
+      
       #regexp matcher       os        implementation
       [/mac\s*os\s*x/i,     :unix,    :osx              ],  
       [/sunos/i,            :unix,    :solaris          ], 
-      [/windows\s*ce/i,     :win32,   :windows          ],
-      [/windows/i,          :win32,   :windows          ],  
+      [/windows\s*ce/i,     :windows, :wince            ],
+      [/windows/i,          :windows, :windows          ],  
       [/osx/i,              :unix,    :osx              ],
-    
-      # TODO: implement other windows matches: # /djgpp|(cyg|ms|bcc)win|mingw/ (from mongrel)
-    
+      
       # These are for RUBY_PLATFORM and JRuby
       [/java/i,             :java,    :java             ],
       [/darwin/i,           :unix,    :osx              ],
@@ -32,25 +31,26 @@ class SysInfo < Storable
       [/solaris/i,          :unix,    :solaris          ],
       [/irix/i,             :unix,    :irix             ],
       [/cygwin/i,           :unix,    :cygwin           ],
-      [/mswin/i,            :win32,   :windows          ],
-      [/mingw/i,            :win32,   :mingw            ],
-      [/bccwin/i,           :win32,   :bccwin           ],
-      [/wince/i,            :win32,   :wince            ],
+      [/mswin/i,            :windows, :windows          ],
+      [/djgpp/i,            :windows, :djgpp            ],
+      [/mingw/i,            :windows, :mingw            ],
+      [/bccwin/i,           :windows, :bccwin           ],
+      [/wince/i,            :windows, :wince            ],
       [/vms/i,              :vms,     :vms              ],
       [/os2/i,              :os2,     :os2              ],
       [nil,                 :unknown, :unknown          ],
     ].freeze
 
     ARCHITECTURES = [
-      [/(i\d86)/i,  :i386             ],
+      [/(i\d86)/i,  :x86              ],
       [/x86_64/i,   :x86_64           ],
-      [/x86/i,      :i386             ],  # JRuby
+      [/x86/i,      :x86              ],  # JRuby
       [/ia64/i,     :ia64             ],
       [/alpha/i,    :alpha            ],
       [/sparc/i,    :sparc            ],
       [/mips/i,     :mips             ],
       [/powerpc/i,  :powerpc          ],
-      [/universal/i,:i386             ],
+      [/universal/i,:x86_64           ],
       [nil,         :unknown          ],
     ].freeze
   end
@@ -77,7 +77,7 @@ class SysInfo < Storable
   def initialize
     @vm, @os, @impl, @arch = find_platform_info
     @hostname, @ipaddress_internal, @uptime = find_network_info
-    require 'Win32API' if @os == :win32
+    require 'Win32API' if @os == :windows
   end
   
   # Returns [vm, os, impl, arch]
@@ -180,26 +180,26 @@ class SysInfo < Storable
   end
   
   def paths_ruby_unix; (ENV['PATH'] || '').split(':'); end
-  def paths_ruby_win32; (ENV['PATH'] || '').split(';'); end # Not tested!
+  def paths_ruby_windows; (ENV['PATH'] || '').split(';'); end # Not tested!
   def paths_java
     delim = @impl == :windows ? ';' : ':'
     (ENV['PATH'] || '').split(delim)
   end
   
   def tmpdir_ruby_unix; (ENV['TMPDIR'] || '/tmp'); end
-  def tmpdir_ruby_win32; (ENV['TMPDIR'] || 'C:\\temp'); end
+  def tmpdir_ruby_windows; (ENV['TMPDIR'] || 'C:\\temp'); end
   def tmpdir_java
     default = @impl == :windows ? 'C:\\temp' : '/tmp'
     (ENV['TMPDIR'] || default)
   end
   
   def shell_ruby_unix; (ENV['SHELL'] || 'bash').to_sym; end
-  def shell_ruby_win32; :dos; end
+  def shell_ruby_windows; :dos; end
   alias_method :shell_java_unix, :shell_ruby_unix
-  alias_method :shell_java_win32, :shell_ruby_win32
+  alias_method :shell_java_windows, :shell_ruby_windows
   
   def home_ruby_unix; File.expand_path(ENV['HOME']); end
-  def home_ruby_win32; File.expand_path(ENV['USERPROFILE']); end
+  def home_ruby_windows; File.expand_path(ENV['USERPROFILE']); end
   def home_java
     if @impl == :windows
       File.expand_path(ENV['USERPROFILE'])
@@ -209,15 +209,15 @@ class SysInfo < Storable
   end
   
   # Ya, this is kinda wack. Ruby -> Java -> Kernel32. See:
-  # http://www.oreillynet.com/ruby/blog/2008/01/jruby_meets_the_windows_api_1.html
+  # http://www.oreillynet.com/ruby/blog/2008/01/jruby_meets_the_windows_api_1.html  
   # http://msdn.microsoft.com/en-us/library/ms724408(VS.85).aspx
   # Ruby 1.9.1: Win32API is now deprecated in favor of using the DL library.
-  def find_uptime_java_win32_windows
+  def find_uptime_java_windows_windows
     kernel32 = com.sun.jna.NativeLibrary.getInstance('kernel32')
     buf = java.nio.ByteBuffer.allocate(256)
     (kernel32.getFunction('GetTickCount').invokeInt([256, buf].to_java).to_f / 1000).to_f
   end
-  def find_uptime_ruby_win32_windows
+  def find_uptime_ruby_windows_windows
     # Win32API is required in self.guess
     getTickCount = Win32API.new("kernel32", "GetTickCount", nil, 'L')
     ((getTickCount.call()).to_f / 1000).to_f
