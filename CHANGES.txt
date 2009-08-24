@@ -5,6 +5,7 @@ SYSINFO, CHANGES
 
 NOTE: SysInfo strings are not compatible with previous releases. 
 
+* FIXED: Don't require Win32API when running in JRuby
 * CHANGE: All references to "win32" are now "windows". This resolves
   the ambiguity between the OS and the Win32 API. 
 * CHANGE: All references to "i386" are now "x86"

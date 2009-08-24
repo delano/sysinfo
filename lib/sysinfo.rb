@@ -77,7 +77,7 @@ class SysInfo < Storable
   def initialize
     @vm, @os, @impl, @arch = find_platform_info
     @hostname, @ipaddress_internal, @uptime = find_network_info
-    require 'Win32API' if @os == :windows
+    require 'Win32API' if @os == :windows && @vm == :ruby
   end
   
   # Returns [vm, os, impl, arch]
