@@ -8,7 +8,7 @@
 # Usage: bin/sysinfo
 #
 
-$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib')) # Make sure our local lib is first in line
+#$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib')) # Make sure our local lib is first in line
 
 require 'drydock'
 require 'sysinfo'
