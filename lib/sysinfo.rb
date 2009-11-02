@@ -9,7 +9,7 @@ require 'time'
 # specifically lib/platform.rb. 
 class SysInfo < Storable
   unless defined?(IMPLEMENTATIONS)
-    VERSION = "0.7.0".freeze
+    VERSION = "0.7.1".freeze
     IMPLEMENTATIONS = [
     
       # These are for JRuby, System.getproperty('os.name'). 
@@ -77,6 +77,8 @@ class SysInfo < Storable
   def initialize
     @vm, @os, @impl, @arch = find_platform_info
     @hostname, @ipaddress_internal, @uptime = find_network_info
+    @ruby = RUBY_VERSION.split('.').collect { |v| v.to_i }
+    @user = ENV['USER']
     require 'Win32API' if @os == :windows && @vm == :ruby
   end
   
@@ -150,10 +152,6 @@ class SysInfo < Storable
     "#{@vm}-#{@os}-#{@impl}-#{@arch}".to_sym
   end
   
-    # Returns Ruby version as an Array of Integers. e.g. [1,9,1]
-  def ruby; RUBY_VERSION.split('.').collect { |v| v.to_i }; end
-    # Return the name of the current user
-  def user; ENV['USER']; end
     # Returns the environment paths as an Array
   def paths; execute_platform_specific(:paths); end
     # Returns the path to the current user's home directory

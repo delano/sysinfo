@@ -1,6 +1,10 @@
 SYSINFO, CHANGES
 
 
+#### 0.7.1 (2009-11-02) #############################
+
+* CHANGE: Include ruby version and user name in standard dump. 
+
 #### 0.7.0 (2009-08-24) #############################
 
 NOTE: SysInfo strings are not compatible with previous releases. 
