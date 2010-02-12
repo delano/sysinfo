@@ -9,7 +9,7 @@ require 'time'
 # specifically lib/platform.rb. 
 class SysInfo < Storable
   unless defined?(IMPLEMENTATIONS)
-    VERSION = "0.7.1".freeze
+    VERSION = "0.7.2".freeze
     IMPLEMENTATIONS = [
     
       # These are for JRuby, System.getproperty('os.name'). 
