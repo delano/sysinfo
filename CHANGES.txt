@@ -1,5 +1,11 @@
 SYSINFO, CHANGES
 
+#### 0.8.0 (2012-04-30) #############################
+
+* CHANGE: Removed #to_s
+* CHANGE: #platform now returns VM-OS-IMPL-ARCH
+* CHANGE: json is the default output format
+
 #### 0.7.2 (2010-02-12) #############################
 
 * CHANGE: Removed hanna dependency [Diego Elio 'Flameeyes' Pettenò]

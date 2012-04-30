@@ -29,9 +29,9 @@ module SysInfoCLI #:nodoc:
   about "Display system information"
   command :info do |obj|
     format = obj.global.format || :string
-    format = :yaml if obj.global.verbose == true
+    format = :json if obj.global.verbose == true
     si = SysInfo.new
-    puts si.dump(format)
+    puts format.to_s == 'string' ? si.platform : si.dump(format)
   end
   
   about "Display list of known architectures"

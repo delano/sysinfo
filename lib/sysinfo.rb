@@ -9,7 +9,7 @@ require 'time'
 # specifically lib/platform.rb. 
 class SysInfo < Storable
   unless defined?(IMPLEMENTATIONS)
-    VERSION = "0.7.3".freeze
+    VERSION = "0.8.0".freeze
     IMPLEMENTATIONS = [
     
       # These are for JRuby, System.getproperty('os.name'). 
@@ -140,16 +140,10 @@ class SysInfo < Storable
     Socket.do_not_reverse_lookup = orig
   end
   
-  # Returns a Symbol of the short platform descriptor in the format: VM-OS
-  # e.g. <tt>:java-unix</tt>
-  def platform
-    "#{@vm}-#{@os}".to_sym
-  end
-  
   # Returns a String of the full platform descriptor in the format: VM-OS-IMPL-ARCH
   # e.g. <tt>java-unix-osx-x86_64</tt>
-  def to_s(*args)
-    "#{@vm}-#{@os}-#{@impl}-#{@arch}".to_sym
+  def platform
+    "#{@vm}-#{@os}-#{@impl}-#{@arch}"
   end
   
     # Returns the environment paths as an Array
@@ -275,5 +269,5 @@ end
 
 
 if $0 == __FILE__
-  puts SysInfo.new.to_yaml
+  puts SysInfo.new.dump('json')
 end
