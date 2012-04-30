@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>File: CHANGES.txt [SysInfo: All your system-independent infoz in one handy class.]</title>
+
+  <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+  <script src="./js/jquery.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/thickbox-compressed.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/quicksearch.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/darkfish.js" type="text/javascript"
+    charset="utf-8"></script>
+</head>
+
+<body class="file">
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+      </div>
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="./CHANGES_txt.html">CHANGES.txt</a></li>
+        
+          <li class="file"><a href="./LICENSE_txt.html">LICENSE.txt</a></li>
+        
+          <li class="file"><a href="./README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="./images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li><a href="./SysInfo.html">SysInfo</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div id="documentation">
+    
+<p>SYSINFO, CHANGES</p>
+
+<p>#### 0.8.0 (2012-04-30) #############################</p>
+<ul><li>
+<p>CHANGE: Removed #to_s</p>
+</li><li>
+<p>CHANGE: #platform now returns VM-OS-IMPL-ARCH</p>
+</li><li>
+<p>CHANGE: json is the default output format</p>
+</li></ul>
+
+<p>#### 0.7.2 (2010-02-12) #############################</p>
+<ul><li>
+<p>CHANGE: Removed hanna dependency [Diego Elio 'Flameeyes' Pettenò]</p>
+</li></ul>
+
+<p>#### 0.7.1 (2009-11-02) #############################</p>
+<ul><li>
+<p>CHANGE: Include ruby version and user name in standard dump.</p>
+</li></ul>
+
+<p>#### 0.7.0 (2009-08-24) #############################</p>
+
+<p>NOTE: <a href="SysInfo.html">SysInfo</a> strings are not compatible with
+previous releases.</p>
+<ul><li>
+<p>FIXED: Don't require Win32API when running in JRuby</p>
+</li><li>
+<p>CHANGE: All references to "win32" are now "windows". This resolves the
+ambiguity between the OS and the Win32 API.</p>
+</li><li>
+<p>CHANGE: All references to "i386" are now "x86"</p>
+</li></ul>
+
+<p>#### 0.6.3 (2009-08-03) #############################</p>
+<ul><li>
+<p>FIXED: "warning: already initialized constant System" in JRuby</p>
+</li></ul>
+
+<p>#### 0.6.2 (2009-06-30) #############################</p>
+<ul><li>
+<p>CHANGE: Updated bin/sysinfo for Drydock 0.6.6</p>
+</li><li>
+<p>CHANGE: Removed "require 'rubygems'"</p>
+</li></ul>
+
+<p>#### 0.6.1 (2009-05-25) #############################</p>
+<ul><li>
+<p>CHANGE: Removed RedCloth dependency from gemspec.</p>
+</li></ul>
+
+<p>#### 0.6.0 (2009-06-09) ###############################</p>
+<ul><li>
+<p>CHANGE: "universal" mapped to "i386". Now: "x86_64"</p>
+</li><li>
+<p>CHANGE: "x86" mapped to "386". Now: "x86"</p>
+</li><li>
+<p>CHANGE: /id86/ mapped to "386". Now: "x86"</p>
+</li></ul>
+
+<p>#### 0.5.1 (2009-05-07) ###############################</p>
+<ul><li>
+<p>CHANGE: Hella cleanup in preparation for future expansion.</p>
+</li><li>
+<p>CHANGE: Modified platform, now returns VM-OS instead of OS-IMPL</p>
+</li><li>
+<p>ADDED: to_s which returns a full platform string</p>
+</li><li>
+<p>ADDED: sysinfo executable</p>
+</li></ul>
+
+<p>#### 0.5 (2009-05-07) ###############################</p>
+<ul><li>
+<p>First public release. See commit history for solutious-stella,
+solutious-rudy,</p>
+</li></ul>
+
+<p>and delano-rye for complete history of <a href="SysInfo.html">SysInfo</a>
+(was SystemInfo).</p>
+
+  </div>
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
+</body>
+</html>
+

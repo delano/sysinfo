@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Class: SysInfo</title>
+
+  <link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+  <script src="./js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body id="top" class="class">
+
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+      </div>
+    </div>
+
+    <div id="file-metadata">
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li><a href="./lib/sysinfo_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/sysinfo.rb">lib/sysinfo.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      
+    </div>
+
+    <div id="class-metadata">
+      
+      <!-- Parent Class -->
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        
+        <p class="link">Storable</p>
+        
+      </div>
+      
+
+      
+
+      
+
+      
+      <!-- Method Quickref -->
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+          <li><a href="#method-c-new">::new</a></li>
+          
+          <li><a href="#method-i-find_hostname">#find_hostname</a></li>
+          
+          <li><a href="#method-i-find_ipaddress_internal">#find_ipaddress_internal</a></li>
+          
+          <li><a href="#method-i-find_network_info">#find_network_info</a></li>
+          
+          <li><a href="#method-i-find_platform_info">#find_platform_info</a></li>
+          
+          <li><a href="#method-i-find_uptime">#find_uptime</a></li>
+          
+          <li><a href="#method-i-home">#home</a></li>
+          
+          <li><a href="#method-i-paths">#paths</a></li>
+          
+          <li><a href="#method-i-platform">#platform</a></li>
+          
+          <li><a href="#method-i-shell">#shell</a></li>
+          
+          <li><a href="#method-i-tmpdir">#tmpdir</a></li>
+          
+        </ul>
+      </div>
+      
+
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="./CHANGES_txt.html">CHANGES.txt</a></li>
+        
+          <li class="file"><a href="./LICENSE_txt.html">LICENSE.txt</a></li>
+        
+          <li class="file"><a href="./README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class/Module Index
+          <span class="search-toggle"><img src="./images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li><a href="./SysInfo.html">SysInfo</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div id="documentation">
+    <h1 class="class">SysInfo</h1>
+
+    <div id="description" class="description">
+      
+<h1><a href="SysInfo.html">SysInfo</a></h1>
+
+<p>A container for the <a href="SysInfo.html#method-i-platform">platform</a>
+specific system information.  Portions of this code were originally from
+Amazon's EC2 AMI tools,  specifically lib/platform.rb.</p>
+
+    </div><!-- description -->
+
+    
+    
+    
+    <div id="5Buntitled-5D" class="documentation-section">
+      
+
+      
+
+      
+      <!-- Constants -->
+      <div id="constants-list" class="section">
+        <h3 class="section-header">Constants</h3>
+        <dl>
+        
+          <dt><a name="ARCHITECTURES">ARCHITECTURES</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="IMPLEMENTATIONS">IMPLEMENTATIONS</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="VERSION">VERSION</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+        </dl>
+      </div>
+      
+
+      
+
+      <!-- Methods -->
+      
+      <div id="public-class-method-details" class="method-section section">
+        <h3 class="section-header">Public Class Methods</h3>
+
+      
+        <div id="new-method" class="method-detail ">
+          <a name="method-c-new"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="new-source">
+<pre>
+<span class="ruby-comment"># File lib/sysinfo.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-ivar">@vm</span>, <span class="ruby-ivar">@os</span>, <span class="ruby-ivar">@impl</span>, <span class="ruby-ivar">@arch</span> = <span class="ruby-identifier">find_platform_info</span>
+  <span class="ruby-ivar">@hostname</span>, <span class="ruby-ivar">@ipaddress_internal</span>, <span class="ruby-ivar">@uptime</span> = <span class="ruby-identifier">find_network_info</span>
+  <span class="ruby-ivar">@ruby</span> = <span class="ruby-constant">RUBY_VERSION</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">'.'</span>).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_i</span> }
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">'USER'</span>]
+  <span class="ruby-identifier">require</span> <span class="ruby-string">'Win32API'</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@os</span> <span class="ruby-operator">==</span> <span class="ruby-value">:windows</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@vm</span> <span class="ruby-operator">==</span> <span class="ruby-value">:ruby</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- new-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- new-method -->
+
+      
+      </div><!-- public-class-method-details -->
+    
+      <div id="public-instance-method-details" class="method-section section">
+        <h3 class="section-header">Public Instance Methods</h3>
+
+      
+        <div id="find_hostname-method" class="method-detail ">
+          <a name="method-i-find_hostname"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">find_hostname</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Return the hostname for the local machine</p>
+            
+
+            
+            <div class="method-source-code" id="find_hostname-source">
+<pre>
+<span class="ruby-comment"># File lib/sysinfo.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_hostname</span>; <span class="ruby-constant">Socket</span>.<span class="ruby-identifier">gethostname</span>; <span class="ruby-keyword">end</span></pre>
+            </div><!-- find_hostname-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- find_hostname-method -->
+
+      
+        <div id="find_ipaddress_internal-method" class="method-detail ">
+          <a name="method-i-find_ipaddress_internal"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">find_ipaddress_internal</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Return the local IP address which receives external traffic from: <a
+href="http://coderrr.wordpress.com/2008/05/28/get-your-local-ip-address/">coderrr.wordpress.com/2008/05/28/get-your-local-ip-address/</a>
+NOTE: This <em>does not</em> open a connection to the IP address.</p>
+            
+
+            
+            <div class="method-source-code" id="find_ipaddress_internal-source">
+<pre>
+<span class="ruby-comment"># File lib/sysinfo.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_ipaddress_internal</span>
+  <span class="ruby-comment"># turn off reverse DNS resolution temporarily </span>
+  <span class="ruby-identifier">orig</span>, <span class="ruby-constant">Socket</span>.<span class="ruby-identifier">do_not_reverse_lookup</span> = <span class="ruby-constant">Socket</span>.<span class="ruby-identifier">do_not_reverse_lookup</span>, <span class="ruby-keyword">true</span>   
+  <span class="ruby-constant">UDPSocket</span>.<span class="ruby-identifier">open</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-string">'65.74.177.129'</span>, <span class="ruby-value">1</span>); <span class="ruby-identifier">s</span>.<span class="ruby-identifier">addr</span>.<span class="ruby-identifier">last</span> } <span class="ruby-comment"># GitHub IP</span>
+<span class="ruby-keyword">ensure</span>  
+  <span class="ruby-constant">Socket</span>.<span class="ruby-identifier">do_not_reverse_lookup</span> = <span class="ruby-identifier">orig</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- find_ipaddress_internal-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- find_ipaddress_internal-method -->
+
+      
+        <div id="find_network_info-method" class="method-detail ">
+          <a name="method-i-find_network_info"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">find_network_info</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Returns [hostname, ipaddr (internal), uptime]</p>
+            
+
+            
+            <div class="method-source-code" id="find_network_info-source">
+<pre>
+<span class="ruby-comment"># File lib/sysinfo.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_network_info</span>
+  <span class="ruby-identifier">hostname</span>, <span class="ruby-identifier">ipaddr</span>, <span class="ruby-identifier">uptime</span> = <span class="ruby-value">:unknown</span>, <span class="ruby-value">:unknown</span>, <span class="ruby-value">:unknown</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">hostname</span> = <span class="ruby-identifier">find_hostname</span>
+    <span class="ruby-identifier">ipaddr</span> = <span class="ruby-identifier">find_ipaddress_internal</span>
+    <span class="ruby-identifier">uptime</span> = <span class="ruby-identifier">find_uptime</span>       
+  <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span> <span class="ruby-comment"># Be silent!</span>
+  <span class="ruby-keyword">end</span>
+  [<span class="ruby-identifier">hostname</span>, <span class="ruby-identifier">ipaddr</span>, <span class="ruby-identifier">uptime</span>]
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- find_network_info-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- find_network_info-method -->
+
+      
+        <div id="find_platform_info-method" class="method-detail ">
+          <a name="method-i-find_platform_info"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">find_platform_info</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Returns [vm, os, impl, arch]</p>
+            
+
+            
+            <div class="method-source-code" id="find_platform_info-source">
+<pre>
+<span class="ruby-comment"># File lib/sysinfo.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_platform_info</span>
+  <span class="ruby-identifier">vm</span>, <span class="ruby-identifier">os</span>, <span class="ruby-identifier">impl</span>, <span class="ruby-identifier">arch</span> = <span class="ruby-value">:ruby</span>, <span class="ruby-value">:unknown</span>, <span class="ruby-value">:unknown</span>, <span class="ruby-value">:unknow</span>
+  <span class="ruby-constant">IMPLEMENTATIONS</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span>, <span class="ruby-identifier">o</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">RUBY_PLATFORM</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+    <span class="ruby-identifier">os</span>, <span class="ruby-identifier">impl</span> = [<span class="ruby-identifier">o</span>, <span class="ruby-identifier">i</span>]
+    <span class="ruby-keyword">break</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-constant">ARCHITECTURES</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span>, <span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">RUBY_PLATFORM</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+    <span class="ruby-identifier">arch</span> = <span class="ruby-identifier">a</span>
+    <span class="ruby-keyword">break</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">os</span> <span class="ruby-operator">==</span> <span class="ruby-value">:java</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">guess_java</span> <span class="ruby-operator">:</span> [<span class="ruby-identifier">vm</span>, <span class="ruby-identifier">os</span>, <span class="ruby-identifier">impl</span>, <span class="ruby-identifier">arch</span>]
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- find_platform_info-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- find_platform_info-method -->
+
+      
+        <div id="find_uptime-method" class="method-detail ">
+          <a name="method-i-find_uptime"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">find_uptime</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Returns the local uptime in hours. Use Win32API in Windows,  'sysctl -b
+kern.boottime' os osx, and 'who -b' on unix. Based on Ruby Quiz solutions
+by: Matthias Reitinger  On Windows, see also: net statistics server</p>
+            
+
+            
+            <div class="method-source-code" id="find_uptime-source">
+<pre>
+<span class="ruby-comment"># File lib/sysinfo.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_uptime</span>
+  <span class="ruby-identifier">hours</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">seconds</span> = <span class="ruby-identifier">execute_platform_specific</span>(<span class="ruby-string">&quot;find_uptime&quot;</span>) <span class="ruby-operator">||</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">hours</span> = <span class="ruby-identifier">seconds</span> <span class="ruby-operator">/</span> <span class="ruby-value">3600</span> <span class="ruby-comment"># seconds to hours</span>
+  <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
+    <span class="ruby-comment">#puts ex.message  # TODO: implement debug?</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">hours</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- find_uptime-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- find_uptime-method -->
+
+      
+        <div id="home-method" class="method-detail ">
+          <a name="method-i-home"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">home</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Returns the path to the current user's <a
+href="SysInfo.html#method-i-home">home</a> directory</p>
+            
+
+            
+            <div class="method-source-code" id="home-source">
+<pre>
+<span class="ruby-comment"># File lib/sysinfo.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">home</span>; <span class="ruby-identifier">execute_platform_specific</span>(<span class="ruby-value">:home</span>); <span class="ruby-keyword">end</span></pre>
+            </div><!-- home-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- home-method -->
+
+      
+        <div id="paths-method" class="method-detail ">
+          <a name="method-i-paths"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">paths</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Returns the environment <a href="SysInfo.html#method-i-paths">paths</a> as
+an Array</p>
+            
+
+            
+            <div class="method-source-code" id="paths-source">
+<pre>
+<span class="ruby-comment"># File lib/sysinfo.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">paths</span>; <span class="ruby-identifier">execute_platform_specific</span>(<span class="ruby-value">:paths</span>); <span class="ruby-keyword">end</span></pre>
+            </div><!-- paths-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- paths-method -->
+
+      
+        <div id="platform-method" class="method-detail ">
+          <a name="method-i-platform"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">platform</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Returns a String of the full <a
+href="SysInfo.html#method-i-platform">platform</a> descriptor in the
+format: VM-OS-IMPL-ARCH e.g. <tt>java-unix-osx-x86_64</tt></p>
+            
+
+            
+            <div class="method-source-code" id="platform-source">
+<pre>
+<span class="ruby-comment"># File lib/sysinfo.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">platform</span>
+  <span class="ruby-node">&quot;#{@vm}-#{@os}-#{@impl}-#{@arch}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- platform-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- platform-method -->
+
+      
+        <div id="shell-method" class="method-detail ">
+          <a name="method-i-shell"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">shell</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Returns the name of the current <a
+href="SysInfo.html#method-i-shell">shell</a></p>
+            
+
+            
+            <div class="method-source-code" id="shell-source">
+<pre>
+<span class="ruby-comment"># File lib/sysinfo.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">shell</span>; <span class="ruby-identifier">execute_platform_specific</span>(<span class="ruby-value">:shell</span>); <span class="ruby-keyword">end</span></pre>
+            </div><!-- shell-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- shell-method -->
+
+      
+        <div id="tmpdir-method" class="method-detail ">
+          <a name="method-i-tmpdir"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">tmpdir</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Returns the path to the current temp directory</p>
+            
+
+            
+            <div class="method-source-code" id="tmpdir-source">
+<pre>
+<span class="ruby-comment"># File lib/sysinfo.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tmpdir</span>; <span class="ruby-identifier">execute_platform_specific</span>(<span class="ruby-value">:tmpdir</span>); <span class="ruby-keyword">end</span></pre>
+            </div><!-- tmpdir-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- tmpdir-method -->
+
+      
+      </div><!-- public-instance-method-details -->
+    
+    </div><!-- 5Buntitled-5D -->
+  
+
+  </div><!-- documentation -->
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
+
+</body>
+</html>
+

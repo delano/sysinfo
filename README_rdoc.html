@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>File: README.rdoc [SysInfo: All your system-independent infoz in one handy class.]</title>
+
+  <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+  <script src="./js/jquery.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/thickbox-compressed.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/quicksearch.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/darkfish.js" type="text/javascript"
+    charset="utf-8"></script>
+</head>
+
+<body class="file">
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+      </div>
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="./CHANGES_txt.html">CHANGES.txt</a></li>
+        
+          <li class="file"><a href="./LICENSE_txt.html">LICENSE.txt</a></li>
+        
+          <li class="file"><a href="./README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="./images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li><a href="./SysInfo.html">SysInfo</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div id="documentation">
+    
+<h1><a href="SysInfo.html">SysInfo</a> - v0.6</h1>
+
+<p>All your system-independent infoz in one handy class.</p>
+
+<p><a href="SysInfo.html">SysInfo</a> does a takes a very quick glance at the
+system it's running on and exposes the results as YAML, JSON, CSV, or TSV.
+It also determines a platform identifier for the system that takes the
+form: VM-OS-IMPLEMENTATION-ARCHITECTURE.</p>
+
+<h3>Platform Identifier Examples</h3>
+
+<pre>ruby-unix-osx-i386
+ruby-unix-osx-powerpc
+ruby-unix-linux-x86_64
+java-win32-windows-i386
+java-win32-mingw-i386</pre>
+
+<p>For the complete list of operating systems, implementations and
+architectures that <a href="SysInfo.html">SysInfo</a> is aware of, see:</p>
+<ul><li>
+<p><tt>$ sysinfo os</tt></p>
+</li><li>
+<p><tt>$ sysinfo impl</tt></p>
+</li><li>
+<p><tt>$ sysinfo arch</tt></p>
+</li></ul>
+
+<h2>Usage -- Library</h2>
+
+<pre>sysinfo = SysInfo.new
+p sysinfo.vm                    # =&gt; ruby
+p sysinfo.os                    # =&gt; unix
+p sysinfo.impl                  # =&gt; osx
+p sysinfo.arch                  # =&gt; i386
+p sysinfo.platform              # =&gt; ruby-unix
+p sysinfo.to_s                  # =&gt; ruby-unix-osx-i386
+
+p sysinfo.user                  # =&gt; delano
+p sysinfo.home                  # =&gt; /Users/delano
+p sysinfo.uptime                # =&gt; 290.429              (hours)
+p sysinfo.shell                 # =&gt; /bin/bash
+p sysinfo.paths                 # =&gt; [/sbin, /bin, /usr/bin, ...]
+
+p sysinfo.hostname              # =&gt; walter
+p sysinfo.ipaddress_internal    # =&gt; 10.0.1.2
+p sysinfo.uptime                # =&gt; 290.573655656974
+p sysinfo.ruby                  # =&gt; [1,9,1]</pre>
+
+<h2>Usage -- Executable</h2>
+
+<pre>$ sysinfo 
+ruby-unix-osx-i386
+
+$ /usr/jruby/bin/sysinfo
+java-unix-osx-x86_64
+
+$ sysinfo -f yaml
+:vm: :ruby
+:os: :unix
+:impl: :osx
+...
+:shell: :&quot;/bin/bash&quot;
+:user: delano
+
+$ sysinfo -f json
+{&quot;vm&quot;:&quot;ruby&quot;,&quot;os&quot;:&quot;unix&quot;,&quot;impl&quot;:&quot;osx&quot;, ..., &quot;shell&quot;:&quot;\/bin\/bash&quot;,&quot;user&quot;:&quot;delano&quot;}
+
+$ sysinfo -f csv
+ruby,unix,osx, ... /bin/bash,delano</pre>
+
+<h2>Installation</h2>
+
+<p>Via Rubygems, one of:</p>
+
+<pre>$ sudo gem install sysinfo
+$ sudo gem install delano-sysinfo --source http://gems.github.com/</pre>
+
+<p>or via download:</p>
+<ul><li>
+<p><a
+href="http://github.com/delano/sysinfo/tarball/latest">sysinfo-latest.tar.gz</a></p>
+</li><li>
+<p><a
+href="http://github.com/delano/sysinfo/zipball/latest">sysinfo-latest.zip</a></p>
+</li></ul>
+
+<h2>Prerequisites</h2>
+<ul><li>
+<p>Ruby 1.8, Ruby 1.9, or JRuby 1.2</p>
+</li><li>
+<p><a href="http://github.com/delano/storable">Storable</a></p>
+</li></ul>
+
+<h2>Credits</h2>
+<ul><li>
+<p>Delano Mandelbaum (delano@solutious.com)</p>
+</li><li>
+<p>Portions of this code were originally from Amazon's EC2 AMI tools,
+specifically lib/platform.rb.</p>
+</li></ul>
+
+<h2>License</h2>
+
+<p>See: <a href="LICENSE_txt.html">LICENSE.txt</a></p>
+
+  </div>
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
+</body>
+</html>
+
