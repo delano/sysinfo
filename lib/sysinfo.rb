@@ -1,6 +1,7 @@
 require 'socket'
 require 'storable'
 require 'time'
+require 'tmpdir'
 
 # = SysInfo
 # 
@@ -78,7 +79,7 @@ class SysInfo < Storable
     @vm, @os, @impl, @arch = find_platform_info
     @hostname, @ipaddress_internal, @uptime = find_network_info
     @ruby = RUBY_VERSION.split('.').collect { |v| v.to_i }
-    @user = ENV['USER']
+    @user = getpwattr(:name) || ENV['USER']
     require 'Win32API' if @os == :windows && @vm == :ruby
   end
   
@@ -178,25 +179,25 @@ class SysInfo < Storable
     (ENV['PATH'] || '').split(delim)
   end
   
-  def tmpdir_ruby_unix; (ENV['TMPDIR'] || '/tmp'); end
-  def tmpdir_ruby_windows; (ENV['TMPDIR'] || 'C:\\temp'); end
+  def tmpdir_ruby_unix; (Dir.tmpdir || '/tmp'); end
+  def tmpdir_ruby_windows; (Dir.tmpdir || 'C:\\temp'); end
   def tmpdir_java
     default = @impl == :windows ? 'C:\\temp' : '/tmp'
-    (ENV['TMPDIR'] || default)
+    (Dir.tmpdir || default)
   end
   
-  def shell_ruby_unix; (ENV['SHELL'] || 'bash').to_sym; end
+  def shell_ruby_unix; (ENV['SHELL'] || getpwattr(:shell) || 'bash').to_sym; end
   def shell_ruby_windows; :dos; end
   alias_method :shell_java_unix, :shell_ruby_unix
   alias_method :shell_java_windows, :shell_ruby_windows
   
-  def home_ruby_unix; File.expand_path(ENV['HOME']); end
+  def home_ruby_unix; File.expand_path(getpwattr(:dir)); end
   def home_ruby_windows; File.expand_path(ENV['USERPROFILE']); end
   def home_java
     if @impl == :windows
       File.expand_path(ENV['USERPROFILE'])
     else
-      File.expand_path(ENV['HOME'])
+      File.expand_path(getpwattr(:dir))
     end
   end
   
@@ -264,6 +265,14 @@ class SysInfo < Storable
     rescue => ex
     end
     ipaddr
+  end
+
+  # Returns a named attribute of the user's /etc/password entry, or nil.
+  # As an example, `getpwdattr(:home)` will return the user's home directory
+  # without relying on ENV['HOME'] being present.
+  def getpwattr(pwattr)
+    passwd = Etc.getpwuid(Process::Sys.getuid) || {}
+    passwd[pwattr]
   end
 end
 
