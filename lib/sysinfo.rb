@@ -10,7 +10,7 @@ require 'tmpdir'
 # specifically lib/platform.rb. 
 class SysInfo < Storable
   unless defined?(IMPLEMENTATIONS)
-    VERSION = "0.8.0".freeze
+    VERSION = "0.8.1".freeze
     IMPLEMENTATIONS = [
     
       # These are for JRuby, System.getproperty('os.name'). 
