@@ -22,4 +22,6 @@ Gem::Specification.new do |s|
     lib/sysinfo.rb
     sysinfo.gemspec
   )
+
+  s.required_ruby_version = '>= 2.6.8'
 end
