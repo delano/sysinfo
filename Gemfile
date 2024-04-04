@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in sysinfo.gemspec
-gemspec
+ruby '>= 2.6.8'
+
+gem 'storable', '0.10.pre.RC1'
+gem 'drydock'

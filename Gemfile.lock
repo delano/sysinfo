@@ -1,0 +1,19 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    drydock (0.6.9)
+    storable (0.10.pre.RC1)
+
+PLATFORMS
+  arm64-darwin-23
+  ruby
+
+DEPENDENCIES
+  drydock
+  storable (= 0.10.pre.RC1)
+
+RUBY VERSION
+   ruby 3.1.4p223
+
+BUNDLED WITH
+   2.5.7
