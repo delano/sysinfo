@@ -52,6 +52,7 @@ class SysInfo < Storable
       [/mips/i,     :mips             ],
       [/powerpc/i,  :powerpc          ],
       [/universal/i,:x86_64           ],
+      [/arm64/i,    :arm64            ],
       [nil,         :unknown          ],
     ].freeze
   end
@@ -62,7 +63,6 @@ class SysInfo < Storable
   field :arch => String
   field :hostname => String
   field :ipaddress_internal => String
-  #field :ipaddress_external => String
   field :uptime => Float
 
   field :paths
@@ -85,7 +85,7 @@ class SysInfo < Storable
 
   # Returns [vm, os, impl, arch]
   def find_platform_info
-    vm, os, impl, arch = :ruby, :unknown, :unknown, :unknow
+    vm, os, impl, arch = :ruby, :unknown, :unknown, :unknown
     IMPLEMENTATIONS.each do |r, o, i|
       next unless RUBY_PLATFORM =~ r
       os, impl = [o, i]
