@@ -50,9 +50,14 @@ class SysInfo < Storable
       [/alpha/i,    :alpha            ],
       [/sparc/i,    :sparc            ],
       [/mips/i,     :mips             ],
+      [/ppc64/i,    :ppc64            ],
       [/powerpc/i,  :powerpc          ],
+      [/ppc/i,      :powerpc          ],
       [/universal/i,:x86_64           ],
       [/arm64/i,    :arm64            ],
+      [/aarch64/i,  :arm64            ],
+      [/arm32/i,    :arm32            ],
+      [/armv7l/i,   :arm32            ],
       [nil,         :unknown          ],
     ].freeze
   end
