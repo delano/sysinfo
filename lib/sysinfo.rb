@@ -11,8 +11,8 @@ require 'tmpdir'
 class SysInfo < Storable
   unless defined?(IMPLEMENTATIONS)
     VERSION = "0.10.0".freeze
-    IMPLEMENTATIONS = [
 
+    IMPLEMENTATIONS = [
       # These are for JRuby, System.getproperty('os.name').
       # For a list of all values, see: http://lopica.sourceforge.net/os.html
 
@@ -50,9 +50,14 @@ class SysInfo < Storable
       [/alpha/i,    :alpha            ],
       [/sparc/i,    :sparc            ],
       [/mips/i,     :mips             ],
+      [/ppc64/i,    :ppc64            ],
       [/powerpc/i,  :powerpc          ],
+      [/ppc/i,      :powerpc          ],
       [/universal/i,:x86_64           ],
       [/arm64/i,    :arm64            ],
+      [/aarch64/i,  :arm64            ],
+      [/arm32/i,    :arm32            ],
+      [/armv7l/i,   :arm32            ],
       [nil,         :unknown          ],
     ].freeze
   end
@@ -155,6 +160,41 @@ class SysInfo < Storable
   def shell; execute_platform_specific(:shell); end
     # Returns the path to the current temp directory
   def tmpdir; execute_platform_specific(:tmpdir); end
+
+
+  class << self
+    def architectures verbose=false
+      arch = SysInfo::ARCHITECTURES.collect { |arch|
+        next if arch[0].nil?
+        verbose ? "%-15s -> %s" % [arch[0].source, arch[1]] : arch[1]
+      }
+      arch.compact.sort
+    end
+
+    def implementations verbose=false
+      reorg = {}
+      SysInfo::IMPLEMENTATIONS.each do |impl|
+        next if impl[0].nil?
+        reorg.store(impl[2].to_s, impl[0])
+      end
+      impl = reorg.keys.sort.collect do |key|
+        verbose ? "%-15s -> %s" % [reorg[key].source, key] : key
+      end
+      impl.compact.uniq
+    end
+
+    def os_families verbose=false
+      reorg = {}
+      SysInfo::IMPLEMENTATIONS.each do |syst|
+        next if syst[0].nil?
+        reorg.store(syst[1].to_s, syst[0])
+      end
+      impl = reorg.keys.sort.collect do |key|
+        verbose ? "%-15s -> %s" % [reorg[key].source, key] : key
+      end
+      impl.compact.uniq
+    end
+  end
 
  private
 
@@ -275,6 +315,7 @@ class SysInfo < Storable
     passwd[pwattr]
   end
 end
+Sysinfo = SysInfo # add alias for common styling
 
 
 if $0 == __FILE__

@@ -6,11 +6,11 @@ SysInfo does a takes a very quick glance at the system it's running on and expos
 
 ## Platform Identifier Examples
 
-- ruby-unix-osx-i386
-- ruby-unix-osx-powerpc
+- ruby-unix-osx-arm64
+- ruby-unix-osx-x86_64
 - ruby-unix-linux-x86_64
-- java-win32-windows-i386
-- java-win32-mingw-i386
+- java-win32-windows-x86_64
+- java-win32-mingw-ia64
 
 For the complete list of operating systems, implementations and architectures that SysInfo is aware of, see:
 
@@ -45,35 +45,38 @@ sysinfo.ruby                  # => [1,9,1]
 ## Usage -- Executable
 
 ```bash
-$ sysinfo
-ruby-unix-osx-i386
+  $ sysinfo
+  ruby-unix-osx-i386
 
-$ /usr/jruby/bin/sysinfo
-java-unix-osx-x86_64
+  $ /usr/jruby/bin/sysinfo
+  java-unix-osx-x86_64
 
-$ sysinfo -f yaml
-:vm: :ruby
-:os: :unix
-:impl: :osx
-...
-:shell: :"/bin/bash"
-:user: delano
+  $ sysinfo -f yaml
+  :vm: :ruby
+  :os: :unix
+  :impl: :osx
+  ...
+  :shell: :"/bin/bash"
+  :user: delano
 
-$ sysinfo -f json
-{"vm":"ruby","os":"unix","impl":"osx", ..., "shell":"\/bin\/bash","user":"delano"}
+  $ sysinfo -f json
+  {"vm":"ruby","os":"unix","impl":"osx", ..., "shell":"\/bin\/bash","user":"delano"}
 
-$ sysinfo -f csv
-ruby,unix,osx, ... /bin/bash,delano
+  $ sysinfo -f csv
+  ruby,unix,osx, ... /bin/bash,delano
 ```
 
 ## Installation
 
 ```bash
-    $ sudo gem install sysinfo
+  $ sudo gem install sysinfo
 ```
 
 
 ## Prerequisites
 
-* Ruby 1.9+, 2.6.8+, 3.1.4+, or JRuby 1.2+
+* Ruby 3.0.2+
+* Ruby 2.6.8+
+* Ruby 1.9+
+* JRuby 1.2+
 * [Storable](https://github.com/delano/storable)
