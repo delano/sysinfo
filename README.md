@@ -45,35 +45,38 @@ sysinfo.ruby                  # => [1,9,1]
 ## Usage -- Executable
 
 ```bash
-$ sysinfo
-ruby-unix-osx-i386
+  $ sysinfo
+  ruby-unix-osx-i386
 
-$ /usr/jruby/bin/sysinfo
-java-unix-osx-x86_64
+  $ /usr/jruby/bin/sysinfo
+  java-unix-osx-x86_64
 
-$ sysinfo -f yaml
-:vm: :ruby
-:os: :unix
-:impl: :osx
-...
-:shell: :"/bin/bash"
-:user: delano
+  $ sysinfo -f yaml
+  :vm: :ruby
+  :os: :unix
+  :impl: :osx
+  ...
+  :shell: :"/bin/bash"
+  :user: delano
 
-$ sysinfo -f json
-{"vm":"ruby","os":"unix","impl":"osx", ..., "shell":"\/bin\/bash","user":"delano"}
+  $ sysinfo -f json
+  {"vm":"ruby","os":"unix","impl":"osx", ..., "shell":"\/bin\/bash","user":"delano"}
 
-$ sysinfo -f csv
-ruby,unix,osx, ... /bin/bash,delano
+  $ sysinfo -f csv
+  ruby,unix,osx, ... /bin/bash,delano
 ```
 
 ## Installation
 
 ```bash
-    $ sudo gem install sysinfo
+  $ sudo gem install sysinfo
 ```
 
 
 ## Prerequisites
 
-* Ruby 1.9+, 2.6.8+, 3.1.4+, or JRuby 1.2+
+* Ruby 3.0.2+
+* Ruby 2.6.8+
+* Ruby 1.9+
+* JRuby 1.2+
 * [Storable](https://github.com/delano/storable)
