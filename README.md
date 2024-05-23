@@ -6,11 +6,11 @@ SysInfo does a takes a very quick glance at the system it's running on and expos
 
 ## Platform Identifier Examples
 
-- ruby-unix-osx-i386
-- ruby-unix-osx-powerpc
+- ruby-unix-osx-arm64
+- ruby-unix-osx-x86_64
 - ruby-unix-linux-x86_64
-- java-win32-windows-i386
-- java-win32-mingw-i386
+- java-win32-windows-x86_64
+- java-win32-mingw-ia64
 
 For the complete list of operating systems, implementations and architectures that SysInfo is aware of, see:
 
