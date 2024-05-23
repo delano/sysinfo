@@ -315,6 +315,7 @@ class SysInfo < Storable
     passwd[pwattr]
   end
 end
+Sysinfo = SysInfo # add alias for common styling
 
 
 if $0 == __FILE__
